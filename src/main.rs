@@ -15,10 +15,10 @@ fn main() {
     }
     let mut input = BufReader::new(File::open(args().nth(1).unwrap()).unwrap());
     let output = File::create(args().nth(2).unwrap()).unwrap();
-    let mut encoder = GzEncoder::new(output, Compression::default());
+    let mut encode = GzEncoder::new(output, Compression::default());
     let timer = Instant::now();
-    copy(&mut input, &mut encoder).unwrap();
-    let output = encoder.finish().unwrap();
+    copy(&mut input, &mut encode).unwrap();
+    let output = encode.finish().unwrap();
     println!(
         "Source len: {:?}",
         input.get_ref().metadata().unwrap().len()
